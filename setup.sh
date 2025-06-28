@@ -36,6 +36,13 @@ confirm(){
 init_macos() {
   make_header "Initializing macOS"
 
+  output "Configuring Ollama"
+  launchctl setenv OLLAMA_ORIGINS "*"
+  launchctl setenv OLLAMA_KEEP_ALIVE -1
+  launchctl setenv OLLAMA_DEBUG true
+  launchctl setenv OLLAMA_KV_CACHE_TYPE "f16"
+  launchctl setenv OLLAMA_FLASH_ATTENTION true
+
   # Run Ollama Config
   ollama_config
 
@@ -130,6 +137,8 @@ ollama_config() {
     ZSH_CONFIG="$ZSH_CONFIG\nexport OLLAMA_DEBUG=1"
     ZSH_CONFIG="$ZSH_CONFIG\nexport OLLAMA_KEEP_ALIVE=-1"
     ZSH_CONFIG="$ZSH_CONFIG\nexport OLLAMA_ORIGINS=\"*\""
+    ZSH_CONFIG="$ZSH_CONFIG\nexport OLLAMA_KV_CACHE_TYPE=\"f16\""
+    ZSH_CONFIG="$ZSH_CONFIG\nexport OLLAMA_FLASH_ATTENTION=1"
 
     if [ ! -z "$MODEL_DIR" ]; then
       ZSH_CONFIG="$ZSH_CONFIG\nexport OLLAMA_MODELS=\"$MODEL_DIR\""
@@ -147,6 +156,8 @@ ollama_config() {
     BASH_CONFIG="$BASH_CONFIG\nexport OLLAMA_DEBUG=1"
     BASH_CONFIG="$BASH_CONFIG\nexport OLLAMA_KEEP_ALIVE=-1"
     BASH_CONFIG="$BASH_CONFIG\nexport OLLAMA_ORIGINS=\"*\""
+    BASH_CONFIG="$BASH_CONFIG\nexport OLLAMA_KV_CACHE_TYPE=\"f16\""
+    BASH_CONFIG="$BASH_CONFIG\nexport OLLAMA_FLASH_ATTENTION=1"
 
     if [ ! -z "$MODEL_DIR" ]; then
       BASH_CONFIG="$BASH_CONFIG\nexport OLLAMA_MODELS=\"$MODEL_DIR\""
@@ -164,6 +175,8 @@ ollama_config() {
     SH_CONFIG="$SH_CONFIG\nexport OLLAMA_DEBUG=1"
     SH_CONFIG="$SH_CONFIG\nexport OLLAMA_KEEP_ALIVE=-1"
     SH_CONFIG="$SH_CONFIG\nexport OLLAMA_ORIGINS=\"*\""
+    SH_CONFIG="$SH_CONFIG\nexport OLLAMA_KV_CACHE_TYPE=\"f16\""
+    SH_CONFIG="$SH_CONFIG\nexport OLLAMA_FLASH_ATTENTION=1"
 
     if [ ! -z "$MODEL_DIR" ]; then
       SH_CONFIG="$SH_CONFIG\nexport OLLAMA_MODELS=\"$MODEL_DIR\""
@@ -181,6 +194,8 @@ ollama_config() {
     FISH_CONFIG="$FISH_CONFIG\nset -gx OLLAMA_DEBUG 1"
     FISH_CONFIG="$FISH_CONFIG\nset -gx OLLAMA_KEEP_ALIVE -1"
     FISH_CONFIG="$FISH_CONFIG\nset -gx OLLAMA_ORIGINS \"*\""
+    FISH_CONFIG="$FISH_CONFIG\nset -gx OLLAMA_KV_CACHE_TYPE \"f16\""
+    FISH_CONFIG="$FISH_CONFIG\nset -gx OLLAMA_FLASH_ATTENTION 1"
 
     if [ ! -z "$MODEL_DIR" ]; then
       FISH_CONFIG="$FISH_CONFIG\nset -gx OLLAMA_MODELS \"$MODEL_DIR\""
